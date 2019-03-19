@@ -1,49 +1,51 @@
-import { Triangle, Circle } from './../src/triangle.js';
+import { Board } from './../src/sudoku.js';
 
 
-describe('Triangle', function() {
+describe('Board', function() {
 
-  it('should correctly determine if a triangle is equilateral', function() {
-    var triangle = new Triangle(3,3,3);
-    expect(triangle.checkType()).toEqual("an equilateral triangle");
-  });
-
-  it('should correctly determine whether three lengths can be made into a triangle', function() {
-    var notTriangle = new Triangle(3,9,22);
-    expect(notTriangle.checkType()).toEqual("not a triangle");
-  });
-
-  it('should correctly determine whether three lengths can be made into a isosceles', function() {
-    var isocTriangle = new Triangle(5,5,7);
-    expect(isocTriangle.checkType()).toEqual("an isosceles triangle");
-  });
-
-  it('should correctly determine whether three lengths can be made into a scalene', function() {
-    var scalTriangle = new Triangle(4,5,7);
-    expect(scalTriangle.checkType()).toEqual("a scalene triangle");
+  it('should check if first row equals to 9', function() {
+    var newBoard = new Board();
+    for(var i = 1;i < 10;i++){
+      newBoard.row.push(i);
+    }
+    
+    expect(newBoard.checkRow()).toEqual(true);
   });
   
-  it('should correctly determine whether three lengths can be made into a equilateral', function() {
-    var scalTriangle = new Triangle(5,5,5);
-    expect(scalTriangle.checkType()).toEqual("an equilateral triangle");
+  it('should check if first row equals to 9', function() {
+    var newBoard = new Board();
+    for(var i = 1;i < 10;i++){
+      newBoard.column.push(i);
+    }
+    
+    expect(newBoard.checkColumn()).toEqual(true);
   });
   
-  it('should correctly calculate total length', function() {
-    var triangle = new Triangle(5,5,5);
-    expect(triangle.totalLength()).toEqual(15);
-  });
-});
+  it('should check if each box adds up to 45', function() {
+    var newBoard = new Board();
 
-describe('Circle', function() {
+    newBoard.board[0][0] = 1;
+    newBoard.board[0][1] = 2;
+    newBoard.board[0][2] = 3;
+    newBoard.board[1][0] = 4;
+    newBoard.board[1][1] = 5;
+    newBoard.board[1][2] = 6;
+    newBoard.board[2][0] = 7;
+    newBoard.board[2][1] = 8;
+    newBoard.board[2][2] = 9;
+  
 
-  it('should test whether a Circle has radius', function() {
-    var circle = new Circle(3);
-    expect(circle.radius).toEqual(3);
+    console.log(newBoard.board);
+    expect(newBoard.checkEachBox()).toEqual(true);
   });
   
-  it('should testa circle area', function() {
-    var circle = new Circle(3);
-    console.log(circle.totalArea())
-    expect(circle.totalArea()).toEqual(28.26);
-  });
+  it('should check if first row does not equal to 9', function(){
+    var newBoard = new Board();
+    for(var i = 1;i < 20;i++){
+      newBoard.row.push(i);
+    }
+    
+    expect(newBoard.checkRow()).toEqual(false);
+  })
+
 });
