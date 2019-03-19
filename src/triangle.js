@@ -20,3 +20,19 @@ Triangle.prototype.checkType = function() {
     return "unable to compute";
   }
 };
+
+Triangle.prototype.totalLength = function() {
+  return this.side1 + this.side2 + this.side3;
+};
+
+export function Circle(radius) {
+  this.radius = radius;
+}
+
+Circle.prototype.totalArea = function() {
+  var area = this.radius * this.radius * 3.14;
+  return area;
+}
+
+
+
